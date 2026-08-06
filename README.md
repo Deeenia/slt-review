@@ -2,7 +2,7 @@
 
 [中文](README.md) | [English](README.en.md)
 
-一个成本与效率优先的 Codex Skill。它只解决一个问题：避免实现模型审查自己的代码。
+一个成本与效率优先的 Codex Skill：由 Sol 负责规划和限定任务边界，Luna 以较低成本完成实现，Terra 通过独立审查降低单一模型的判断偏差。
 
 ```text
 当前 Sol：一次布局
@@ -23,20 +23,15 @@ Sol：直接汇总，不复验
 - Fresh Terra 只读审查 Luna 修改的确切文件，默认不重复运行验证。
 - Terra PASS 后，Sol 直接返回结果，不再读完整代码、不重建快照、不计算摘要、不重跑测试。
 - Terra 发现具体问题时，最多允许 Luna 修正一次，再由新的 Terra 复审一次。
-- 当前版本不支持 Terra 实现或 Fresh Sol 审计。Luna 无法安全执行时直接 `BLOCKED`。
+- Terra 不参与实现，也不担任实现者的唯一审查者。Luna 无法安全执行时直接 `BLOCKED`。
 
-## 为何更快
+## 成本与效率策略
 
-本版本删除了此前造成延迟的流程：
-
-- 第二个 Sol Controller
-- 模型身份握手
-- 风险模式与分阶段调度
-- run/task/review ID
-- boundary SHA-256
-- candidate manifest 与多次冻结
-- Sol 最终重复测试
-- Terra 默认重复测试
+- 只让高能力的 Sol 完成需求理解、任务布局、边界制定与最终汇总。
+- 将主要编码工作交给 Luna，降低实现阶段的模型成本。
+- Terra 只审查 Luna 的实际改动，以不同模型视角发现遗漏和偏差。
+- 正常成功路径只调用 Luna 和 Terra 各一次。
+- 默认不重复运行已经成功的验证；只有 Terra 报告具体缺陷时才进入一次修正和复审。
 
 Boundary 使用普通工作区路径，不写受保护的 `.codex` 目录。它属于控制元数据，不进入产品文件列表。
 
@@ -67,8 +62,6 @@ sh scripts/validate.sh
 python3 -m unittest discover -s tests -v
 sh scripts/install.sh --force
 ```
-
-升级安装会安全移除旧版本管理的 `sol-controller`、`terra-worker` 和 `sol-auditor`；若这些文件被修改，`--force`/`-Force` 会先备份。
 
 安装后完全重启 Codex Desktop，新建 Sol 任务，然后只描述结果：
 
