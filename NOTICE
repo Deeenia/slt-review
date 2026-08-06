@@ -1,0 +1,9 @@
+SLT Review
+Copyright 2026 SLT Review contributors
+
+The role-routing concept and fail-closed runtime verification approach were inspired by
+"codex-sol-control" by yehyakin:
+https://github.com/yehyakin/codex-sol-control
+
+This repository is an independent implementation with a different cross-model review
+architecture. No endorsement by OpenAI or the upstream project is implied.
