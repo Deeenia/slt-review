@@ -1,0 +1,7 @@
+interface:
+  display_name: "SLT Review"
+  short_description: "Sol plans, Luna implements, Terra independently reviews"
+  default_prompt: "Use $slt-review for this task with the low-cost Sol to Luna to Terra workflow."
+
+policy:
+  allow_implicit_invocation: false
