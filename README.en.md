@@ -47,12 +47,46 @@ The boundary lives in the ordinary workspace rather than the protected `.codex` 
 
 Requires Python 3.11+.
 
-Windows:
+First download the repository and enter its directory in a local terminal:
+
+```bash
+git clone https://github.com/Deeenia/slt-review.git
+cd slt-review
+```
+
+Windows PowerShell:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\install.ps1 -Force
+```
+
+macOS/Linux:
+
+```bash
+sh scripts/install.sh --force
+```
+
+Fully restart Codex Desktop after installation.
+
+## Usage example
+
+Open a fresh Sol task in Codex Desktop and state only the desired result:
+
+```text
+$slt-review
+
+Create a local personal bookkeeping web app using Python Flask and SQLite. Support adding, editing, and deleting income and expense entries, filtering by month and category, and displaying monthly income, expenses, and balance.
+```
+
+The user does not need to specify tests, risk, or an orchestration mode.
+
+## Developer validation
+
+Windows PowerShell:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\validate.ps1
 python -m unittest discover -s tests -v
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\install.ps1 -Force
 ```
 
 macOS/Linux:
@@ -60,18 +94,7 @@ macOS/Linux:
 ```bash
 sh scripts/validate.sh
 python3 -m unittest discover -s tests -v
-sh scripts/install.sh --force
 ```
-
-Restart Codex Desktop, open a fresh Sol task, and state only the desired result:
-
-```text
-$slt-review
-
-Create a Python random number generator for 0-1000.
-```
-
-The user does not need to specify tests, risk, or an orchestration mode.
 
 ## Structure
 

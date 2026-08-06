@@ -47,12 +47,46 @@ Boundary 使用普通工作区路径，不写受保护的 `.codex` 目录。它�
 
 要求 Python 3.11+。
 
-Windows：
+先在本地终端下载仓库并进入项目目录：
+
+```bash
+git clone https://github.com/Deeenia/slt-review.git
+cd slt-review
+```
+
+Windows PowerShell：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\install.ps1 -Force
+```
+
+macOS/Linux：
+
+```bash
+sh scripts/install.sh --force
+```
+
+安装完成后，完全重启 Codex Desktop。
+
+## 运行示例
+
+在 Codex Desktop 中新建一个 Sol 任务，然后只描述希望得到的结果：
+
+```text
+$slt-review
+
+请创建一个本地个人记账 Web 应用，使用 Python Flask 和 SQLite，支持收入与支出记录的新增、编辑和删除，按月份与分类筛选，并显示月度收入、支出和结余。
+```
+
+用户不需要指定测试、风险或运行模式。
+
+## 开发者验证
+
+Windows PowerShell：
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\validate.ps1
 python -m unittest discover -s tests -v
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\install.ps1 -Force
 ```
 
 macOS/Linux：
@@ -60,18 +94,7 @@ macOS/Linux：
 ```bash
 sh scripts/validate.sh
 python3 -m unittest discover -s tests -v
-sh scripts/install.sh --force
 ```
-
-安装后完全重启 Codex Desktop，新建 Sol 任务，然后只描述结果：
-
-```text
-$slt-review
-
-请创建一个 Python 随机数生成器（0-1000）。
-```
-
-用户不需要指定测试、风险或运行模式。
 
 ## 项目结构
 
